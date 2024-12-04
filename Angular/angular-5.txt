@@ -1,0 +1,94 @@
+1)
+//innerHtml
+
+    <div [innerHTML]="workshop.description"></div>
+===============================================
+2)fontawesome angular
+========================================
+i)add fontawesome lib in the project
+
+ng add @fortawesome/angular-fontawesome
+
+ii)select version and select free solid and regular icons
+
+iii)import all icons and module in ts file
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faFontAwesome } from '@fortawesome/free-regular-svg-icons';
+import {
+  faCircleCheck,
+  faCircleXmark,
+} from '@fortawesome/free-regular-svg-icons';
+
+=========
+iv)create one variale putting these icons
+{
+icons = { faCircleCheck, faCircleXmark };
+
+}
+======
+
+v)include this way in html file
+
+<div>
+  <fa-icon [icon]="icons.faCircleCheck"></fa-icon>
+</div>
+
+
+====================================
+child Routing
+=====================================
+down of sessions.html page we are adding other components through routing
+---------------------------
+sessions sessions sessions |
+sessions sessions session  |
+ADD-A-SESSION	           |	
+----------------------------		
+
+WORKSHOPS.HTML
+<div class="my-3">
+    <button
+        [routerLink]="['/workshops', workshop.id]"
+        class="btn btn-primary btn-sm me-2"
+    >
+        Sessions List
+    </button>
+    <button
+        [routerLink]="['/workshops', workshop.id, 'add-session']"
+        class="btn btn-primary btn-sm"
+    >
+        Add a session
+    </button>
+</div>
+
+============================
+ROUTES.TS
+===========
+{
+        path: 'workshops/:id',
+        component: WorkshopDetailsComponent,
+        title: 'Workshop Details',
+        children: [
+            {
+                path: '', // same as parent route
+                component: SessionsListComponent,
+            },
+            {
+                path: 'add-session',
+                component: AddSessionComponent,
+            },
+        ],
+    },
+
+===============
+put request
+===============
+ voteForSession(sessionId: number, voteType: 'upvote' | 'downvote') {
+        return this.http.put<ISession>(
+            `https://workshops-server.onrender.com/sessions/${sessionId}/${voteType}`,
+            null // we pass data in put request. In this case we don't have any data
+        );
+    }
+
+=================================
+
+

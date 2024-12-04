@@ -1,0 +1,36 @@
+=======================
+fixtures
+=======================
+
+1)we can create Components and many more
+let fixture:ComponentFixture<CourseCardListComp>
+
+await TestBed.configureTesingModule({
+
+imports:[coursesModule],
+
+}).compileComponents();
+
+fixture=TestBed.createComponent(coursesCardListComponent);
+
+component = fixture.componentInstance;
+
+});
+
+it("should create the component",()=>{
+
+expect(component).toBeTruthy();
+
+});
+
+it("should display the course list",()=>{
+
+pending();
+});
+
+it("should display the first course",()=>{
+
+pending();
+});
+
+});

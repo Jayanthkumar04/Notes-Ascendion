@@ -1,0 +1,176 @@
+============
+functions
+=============
+
+1)every function has access to this
+
+2)
+
+===============
+
+
+===============
+
+1)global object in browser is the "window"
+
+2)calling function==>  i)foo()
+                      ii)foo.call() //helps us to call the function with different context
+
+                        foo.call({name:'john'},100); the first argument will be "this" and from second argument onwards it is the arguments in functions
+
+
+
+
+
+
+
+=================
+
+default arguments
+
+================
+function greet(name="jayanth",msg="nothing now")
+{
+    console.log(`my name is ${name} and my msg is ${msg}`);
+}
+
+greet("harinivas","i am great");
+
+greet();
+
+greet("yash");
+
+
+===================
+STRINGS
+===================
+strings are immutable in js
+
+str.replace(/greet/g,"wish"); // regular expresssions
+
+
+str.join()==to join to arrays
+
+==================
+NUMBERS
+=================
+const amountToTransfer="1500.50";
+
+const amountToTransferFloat = parseFloat(amountToTransfer);
+
+const amountToTransferInt = parseInt(amountToTransfer);
+
+/************* SHORTCUT *****************/
+const amount = +amountToTransfer;
+
+=========
+toFixed()
+=========
+const pi = 3.14121212;
+
+console.log(pi.toFixed(3)); // it gives 3 numbers after decimal
+
+
+============
+MATH CLASS
+============
+
+console.log(Math.sin(Math.PI/2));
+
+console.log(Math.round(2.5));
+
+console.log(Math.floor(2.6));
+
+console.log(Math.ceil(2.6));
+
+console.log(Math.abs(-2.65));
+
+console.log(Math.sign(-21));
+
+Math.random()
+
+
+========
+splice
+========
+
+
+
+
+
+======
+JOINS
+=====
+
+
+
+
+=======
+SORT
+======
+
+
+
+===============
+ARRAY METHODS()
+===============
+
+
+
+
+============
+set timeout
+============
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=================
+DESTRUCTURING
+=================
+
+const weekdays=['Monday','Tuesday','wed','fri'];
+
+
+
+
+=====
+rest operator
+=====
+
+
+
+
+=======
+spread operator
+==========
+
+
+
+
+
+
+
+
+
+
+
+=============
+arrow functions deep
+=================
+
+arrow functions dont have their own context
+
+
+===============
+

@@ -1,0 +1,139 @@
+body gives 8px margin
+=================
+background image
+=================
+backgrount-url()
+
+background-repeat:no-repeat
+
+background-size:100%(x axis expandss give only x or y)
+
+background-size:cover;(its okay but it may cut some edge portions)
+
+background-size:contain;
+
+
+
+=====================
+float properties
+=====================
+if image is inserted in between then the line height increasesss
+To move text around it we cn use float:left or right properties
+
+(float is not used much)
+
+
+====================
+positions
+===================
+
+only work with the non-static positions
+
+====>fixed======== it will fix to the browser viewport
+.one{
+
+position:fixed;
+bottom:0px;
+
+}
+
+=========
+relative
+=========
+position will fix with respect to the element itself
+
+.two{
+
+position:relative;
+top:20px;
+}
+
+if two elements are given relative then the second one will come on top
+(which one comes last that will come on top)
+
+but if we want control to us then we can use z-index;
+
+=========
+z-index
+=========
+
+more is the z-index ,it comes on the top
+
+================
+absolute position
+================
+
+it will place with respect to the parent element
+
+it first searches for the non-static parent elements
+
+so if we are working if the parent is non static it chooses body to be parent
+
+ section{
+        border: 2px solid black;
+        padding:2px;
+        position: relative;
+     }
+     div{
+        height: 100px;
+        padding:16px;
+     }
+
+     .one{
+        background-color: red;
+     }
+
+     .two{
+        background-color: gray;
+        position:absolute;
+        width: 100%;
+        top:50px;
+     }
+==============================================================
+==============================================================
+
+inline,block all are layout techniques
+
+
+
+===============
+flex box
+================
+
+one parent element can control all the child elements
+
+it is combination of 15 properties
+(these can be set on the parent or on the child)
+
+
+==========
+flex-basis
+==========
+
+width:fit-content(if anything goes outt it will adjusttt)
+
+flex-basis:30%  (if 3 children are there they will distribute among them wrt the parent)(in child)
+
+(in parent)
+justify-content:space-between
+   		    space-evenly
+		    center
+
+to get some gap between the child elements we use ==> gap:{}
+
+
+     flex-grow:  (in child)
+
+
+===============
+(horizontal direction)
+align-items:flex-start (if child wants border till where it have)
+
+align-items:flex-end
+
+align-items:center
+================
+(justify content ==========> vertical direction)
+
+
+transform transition translate

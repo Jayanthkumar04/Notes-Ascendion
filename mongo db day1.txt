@@ -1,0 +1,357 @@
+============
+mongo db
+============
+1)it is NoSQL database
+
+2)we dont use sql queries to fetch data
+
+3)we use programming(java script functions ) to fetch data and all
+
+4)instead of tables we have collections in mongo db
+
+5)documents are like ==> recordss
+
+6)collections in js will be stored in memory 
+in mongodb it will be stored in the "disc"
+
+7)collections are like recordsss
+
+8)$mongod  ==>it is backend 
+
+9)compass   ==>it is the frontend for the mogod
+===================================
+starting the server
+===================================
+10)we need to start the server
+
+11)dir (for list of directries)
+
+12)command to start server : mongod --dbpath ./data-ascendion/db
+
+13)mongodb runs on the server => 27017
+
+===============
+some commands
+===============
+1)show databases ==>to know what databases are there
+
+2)use <database_name>
+
+3)show collectinos; //to know collections
+
+4)db.<collection_name>.find //to know the records in the database
+
+==============
+insert data
+=============
+
+//members is the collection
+
+
+
+db.members.insertOne(
+
+{
+ name:"Jayanth",
+ place:"Andhra"
+
+}
+
+)
+
+================
+
+db.members.insertMany(
+
+[
+
+{
+name:"jayanth",
+place:"andhra"
+},
+
+{
+name:"thanuja",
+place:"warangal"
+},
+
+{
+name:"sujan",
+place:"orrisa"
+}
+
+]
+
+)
+=================
+
+collection files
+
+=================
+
+when data is converted then 
+
+the json type data will be converted to
+
+bson type (binary json)
+
+===================
+searching a record
+====================
+db.members.find(
+{
+name:"sujan";
+}
+)
+
+===================
+update
+===================
+
+db.members.updateOne
+(
+
+{
+
+
+}
+
+)
+
+============
+ex1
+===========
+db.members.updateOne(
+  {
+name:"thanuja"
+},{
+$set:{
+place:"banglore"
+}
+
+}
+);
+============
+ex2
+===========
+const findClause={
+name:"jayanth"
+};
+const updateClause={
+$set:{
+place:"hyd"
+}
+};
+
+db.members.updateOne(
+findClause,
+updateClause
+);
+
+==============
+delete record
+========
+
+db.members.deleteOne(
+
+{
+name:"Jayanth"
+}
+
+)
+
+=======
+NoSQL
+=======
+
+1)relational ==> it is tables with relations with other tables
+
+2)
+
+
+
+
+
+
+
+
+==============
+more operators
+===============
+1)$lt
+
+db.shows.find({
+runtime:{
+$lt:60
+}
+})
+
+==================
+2)it (for more recordsss)
+
+===================
+3)between 30 and 60
+
+db.shows.find({
+runtime:{
+$gt:30,
+$lt:60
+}
+cm`
+}).count()
+
+================
+
+db.shows.find({
+"rating.average":{
+   $gt:8
+}
+
+})
+
+===============
+
+Find shows in horror genre
+"consider array elements as a value"
+
+===========
+
+
+genres
+Array (3)
+0
+"Action"
+1
+"Adventure"
+2
+"Science-Fiction"
+
+
+=================
+
+db.shows.find({
+genres:"Horror"
+
+})
+
+
+===================================
+neither not in hbo or fox networkss
+===================================
+db.shows.find({
+"network.name":{
+$nin:["HBO",
+        
+        "FOX" 
+  ]
+}
+}).count()
+
+===============
+OR Operator
+================
+db.shows.find({
+$or:[
+  {
+genres:"Drama"
+},
+  {
+genres:"Horror"
+}
+
+]
+})
+
+=======================================
+v) Find shows that do not have at least one of Drama or Horror as their genre 
+(i.e. show could have Drama but not Horror, Horror but not Drama, or neither 
+Drama not Horror)
+============================================
+
+db.shows.find({
+$or:[
+  {
+  genres:{
+  $ne:'Drama'
+  }
+},
+    {
+  genres:{
+  $ne:'Horror'
+}
+}
+
+
+]
+
+})
+
+
+===================
+slice
+===================
+
+
+
+
+
+
+
+
+
+
+
+=======================
+cursor,hasNext()
+=======================
+
+sort() ->method of cursor
+
+db.shows.find().sort(
+
+{
+"rating.average":1
+}
+
+{
+"weight"
+}
+)
+
+
+=====================
+limit and sort
+=====================
+
+db.shows.find({},{
+name:1,"rating.average":1,weight:1
+})
+
+.sort(
+  {
+"rating.average":-1,
+"weight":-1
+
+}
+
+).limit(5)
+===========
+skip
+===========
+db.shows.find({
+
+
+},{
+name:1,"rating.average":1,weight:1
+}).sort(
+  {
+"rating.average":-1,
+"weight":-1
+
+}
+
+).limit(5).skip(10);
+
+=============
+
+=============

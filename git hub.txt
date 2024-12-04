@@ -1,0 +1,60 @@
+add/commit/push
+====================
+.gitignore
+===================
+files wont be added in the repository
+
+in .gitignore file "just add file name" it is done
+
+git clone 
+
+git pull
+
+git log ==> the history of the commits
+        ==> we see latest commits at top and rest at bottom
+
+git diff ==> we give 2 commit ids
+             (it shows what files added between this timeline 
+
+git diff f1..f2;
+
+git diff(if given without ids then it shows what is present in staged areas and unstaged)
+
+=====================
+staging and unstaging
+=====================
+
+git add public ==>all files will be added to staged area
+
+git restore --staged public/about.html 
+
+=====================
+stash and pop
+=====================
+git stash ==> it will delete all the changes done locally 
+ 
+git stash pop ==> it will bring up all the discared changes done locally
+
+
+====================
+branching
+====================
+
+git branch ==> it will show all the branches that are present
+
+git branch <branch name> it will create a new branch
+
+
+git checkout develop  -====> it will switch to the develop branch
+
+git push u -origin develop
+
+$ git checkout --track origin/develop
+
+
+=============
+
+=============
+
+
+$git rebase --continue ==> we can confirm changes after doing changes when conflicts occurs

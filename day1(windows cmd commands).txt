@@ -1,0 +1,26 @@
+cd <first-letter> tab ==> automatically folder name will come
+
+cd ==> present working directory
+
+cd .. ==> goes to parent directory
+
+dir ==> lists all folderss
+
+
+============================================
+
+for images we have to set either height or width or elese image will get distorted
+==========================================
+relative path==>
+images/koala-bear.jpeg
+
+absolute path==>
+C:\Users\jayanth.yadavalli\OneDrive - ascendion\Desktop\tasks2\ascendion-fsd-oct-dec-2024\demos\images\koala-bear.jpeg
+=================================================
+enlarging==>                
+transform:scale(2);
+
+for rotating==>
+transform:rotate(90deg)
+
+===============================================================

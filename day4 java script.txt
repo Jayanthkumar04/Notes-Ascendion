@@ -1,0 +1,189 @@
+1995 ==> nextscape (used) for dynamic webpages
+
+2015 it became statardized (es6 ==> ecma script) 
+(introduced lot of features made it simpler)
+
+js takes some time to execute so it is put at top of (body closing tag)
+
+==============
+
+to run js
+
+
+==> node filename.js
+
+===============
+
+OPERATORS
+
+=================
+==========
+arithmetic
+==========
+division operator will give float value
+
+==========
+relational
+==========
+<,<=,>=, == ,!=
+
+=== (type check operator)
+=================
+logical operators
+=================
+!
+&&
+||
+
+console.log(2<1 && 2<3);//false(checks only 2<1 and stops)-->short-circuit evaluation
+
+
+===================
+equivalent to false
+===================
+//false , " " , 0 , null , undefined, NaN
+
+==========================================================
+EXPRESSION WITH LOGICAL OPERATOR CAN HAVE NON BOOLEAN TYPE
+==========================================================
+
+console.log(1&&2);//2
+
+console.log(0 && 2); //0
+
+console.log(1 || 2); //1
+
+console.log(0 || 2); //2
+
+console.log("" || 0);//0
+
+console.log((2<3)?"yes":"no");
+
+
+========================
+to clear the console
+========================
+
+console.clear()
+
+=======================
+to exit from the console
+=======================
+
+.exit (in terminal)
+
+=========================
+Arrays
+========================
+
+const primes = [10,20,33,87];
+
+console.log(primes.length);
+
+console.log(primes[10]) //==>it wont throws an error it Gives "undefined"
+
+primes[20]=11; // remaining all items it will be initialized to "undefined"
+
+
+//with const for arrays (the array items can be manipulated,But the variable primes cannot be assigned anything else
+
+//primes=[60,66,1,44]//throws an error
+
+=============
+array methods
+=============
+
+.push()
+.pop()
+.shift()//deletes first element
+.unshift()//adds element to the first
+
+
+
+=============
+objects
+=============
+
+const obj={
+
+movie:"Bahubali",
+
+cast:[
+
+"Prabhas",
+"
+]
+,
+
+
+
+}
+======
+delete
+======
+delete obj["cast"]
+
+=======
+new key
+=======
+obj.villian={
+
+name:"jfdsf",
+age:67
+}
+
+=================
+FUNCTIONSS
+===================
+
+// 3 main syntaxes create function
+
+// function declaration syntax - created before the script executes
+function sum1(x, y) {
+    const result = x + y;
+    return result;
+}
+============================================
+// function expression syntax - this function is created when this line of code runs
+const sum2 = function (x, y) {
+    const result = x + y;
+    return result;
+};
+===============================================
+console.log(sum2(12, 13)); // no error
+
+
+// arrow function syntax (ES2015)
+const sum3 = (x, y) => {
+    // const result = x + y;
+    return x + y;
+};
+=============================
+const sum4 = (x, y) => x + y;
+
+console.log(sum4(12, 13));
+=============================================
+
+// const square = (x) => x * x;
+const square = x => x * x;
+
+================================================
+
+==============================
+pecular behavior with function
+==============================
+
+
+
+
+
+
+...restParameters
+
+function(message1,message2,...args)
+{
+
+
+}
+args is basically a array
+

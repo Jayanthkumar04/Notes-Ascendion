@@ -1,0 +1,13 @@
+1)
+//innerHtml
+
+    <div [innerHTML]="workshop.description"></div>
+===============================================
+2)display workshop detailsss
+
+
+============================================
+3)fontawesome angular
+
+
+========================================

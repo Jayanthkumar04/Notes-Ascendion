@@ -1,0 +1,92 @@
+=============
+INTRODUCTION
+=============
+
+1)can build web apis , desktop apps , crossplatform applications(run on diff os)
+
+2).net core mvc .........
+
+3)ecommerce sites , content management system
+
+4)Game development
+
+5)if written in any lang .net =>it is converted to a form called common language 
+
+
+6)we r gng to work with .net 8..
+
+7)asp .net core
+
+=================
+Methods
+=================
+
+1)console.WriteLine("text");  Write
+                              Line
+===========
+variables
+============
+
+2)int , float , double , 
+
+  char, Boolean, decimal(used for currency)
+
+  signed(--ive will be)
+
+  byte(numbers) ,short , ushort, long
+===========
+non primitive
+==============
+
+1)string,
+
+
+=============
+SHORTCUTS
+=============
+CW+tab+tab ==> console.WriteLine()
+
+try+tab+tab ==> will give try catch block
+====================
+Namining conventions
+=====================
+1
+//variables with keyword as name prefix with @
+
+2)MethodName()
+
+3)normalVariable
+
+4)_privateField
+
+5)publicField
+
+====================
+Converting datatypes int.parse(variable)
+====================
+
+string a="100";
+
+int b = int.parse(a);
+
+=============================
+internal imple
+=============================
+
+1)when runned
+
+to run exe file ./file_name
+
+========
+class
+=======
+
+namespace Demo;
+
+public class Demo
+{
+    public static void Main(string[] args)
+    {
+
+    }
+}

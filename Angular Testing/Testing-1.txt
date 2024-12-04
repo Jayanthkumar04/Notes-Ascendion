@@ -1,0 +1,60 @@
+1)Testing are written in 'jasmine' in angular
+ 
+2)Test runner -Karma
+
+3)These are all did in the node js server(so may not work on the borwser)
+
+4)No need of server and frontend running for the testing
+
+=============
+Run Tests
+=============
+1)npm run test
+
+=====================
+For empty test cases
+=====================
+2)git checkout 1-start
+
+==================
+it function
+===================
+
+it has 3 parts i)arrange ii)act iii)assert
+
+1)primitive values check with (toBe)
+
+2)for non-primitives use (toEquals)
+
+=======================
+Grouping similar tests
+=======================
+
+
+describe("description",()=>{
+
+//all tests
+
+});
+
+beforeEach(()=>{
+
+
+}); // before running each test case this will get execute
+
+
+
+
+============
+Modules
+============
+1)Each component belongs to only one module
+
+2)we need to import the modules what we need and we need to export what we needed to send to other module
+
+===================
+for testing module
+===================
+provide providers in the module app.modules.ts
+
+

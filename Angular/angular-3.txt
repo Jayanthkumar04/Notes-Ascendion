@@ -1,0 +1,196 @@
+=======================================
+@for()  *ngFor  and track in angular
+=======================================
+
+<div *ngFor="let w of workshops; trackBy: trackById">
+
+======
+in ts
+======
+trackById(index: number, item: Iworkshop) {
+    return item.id;
+  }
+
+=================
+@for
+==================
+@for( workshop of workshops; track workshop.id ) {
+<div>{{ workshop.name }}</div>
+}
+
+================================
+set a class based on a condition
+================================
+<div
+  class="d-flex justify-content-center"
+  [ngClass]="{
+    'text-primary': variant === 'primary',
+    'text-secondary': variant === 'secondary',
+    'text-danger': variant === 'danger',
+    'text-success': variant === 'success',
+    'text-warning': variant === 'warning',
+    'text-info': variant === 'info',
+    'text-light': variant === 'light',
+    'text-dark': variant === 'dark',
+  }"
+>
+</div>
+
+==========================================
+@Input() sending data from parent to child
+==========================================
+==============
+workshoplist.html
+============
+<app-pagination  > 
+
+</app-pagination>
+
+1)page count is in worksh..list.ts
+
+2)but app-pagination is in pagination component so,to send that data we use @Input()
+
+================================
+3)
+<app-pagination [page]="page" >  //if value is hard-coded use syntax: page="1" 
+                                 //if cmng from ts file use syntax : [var_in pagination]:"var_in list.ts"
+
+</app-pagination>
+
+==========================
+4)pagination.ts
+{
+  @Input()
+  page: number = 1;
+
+}
+now page is local in pagination.ts file
+====================
+
+
+=========================================
+Output= (sending data from child to parent
+=========================================
+
+1)there is an click event in pagination when click it has to update in list.ts
+
+2)to get data from child to parent we use @output
+
+3)here we need to use EventEmitter<data_type it gives>()
+
+4)it returns an event with data
+
+=================
+5)pagination.html
+=================
+    <button (click)="update(-1)">previous</button>
+=================
+6)pagin..ts
+=================
+{ //emit() 
+  @Output()
+  updateBy = new EventEmitter<number>();
+  update(by: number) {
+    
+    this.updateBy.emit(this.page + by);
+  }
+}
+
+====================
+7)workshoplist.html
+====================
+//event has to be received by parent by
+//($event)
+(<function in child> )="<function in parent>($event)"
+
+<app-pagination [page]="page" (updateBy)="update($event)"> 
+  
+</app-pagination>
+=========================
+
+==========================================
+adding query string param based on page
+==========================================
+1)
+===================
+work...list.ts
+==================
+page: number = 1;
+
+  getWorkshops() {
+    this.workshop.getWorkshops(this.page).subscribe({
+      next: (data) => {
+        this.workshops = data;
+        console.log(data);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+  
+2)
+=================
+work .service
+================
+
+  getWorkshops(page: number) {
+    return this.http.get<Iworkshop[]>(
+      `https://workshops-server.onrender.com/workshops`,
+      {
+        params: {
+          _page: page,
+        },
+      }
+    );
+  }
+}
+
+3)
+the above one is okay it wont change the page number for that we need to use other method 
+it is one type of observable object like subscibe
+==================
+(.ts)
+===================
+getWorkshops() {
+    this.workshop.getWorkshops(this.page).subscribe({
+      next: (data) => {
+        this.workshops = data;
+
+        this.router.navigate(['/list'], {
+          queryParams: {
+            page: this.page,
+          },
+        });
+
+constructor(private router:Router)
+{ }
+  
+=======================
+
+==============================================
+ActivatedRouteMap (queryParamMap()   )
+==============================================
+When the component is initialized, it subscribes to the queryParamMap observable, which listens for changes in the query parameters of the URL.
+It retrieves the page query parameter (e.g., /workshops?page=2) and sets the page variable. If no page parameter is found, it defaults to page = 1.
+
+  constructor(
+    private workshop: WorkshopService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
+    activatedRoute.queryParamMap.subscribe({
+      next: (queryMaps) => {
+        const queryStr = queryMaps.get('_page');
+
+        if (queryStr === null) {
+          this.page = 1;
+        } else this.page = +queryStr;
+
+        this.getWorkshops();
+      },
+}
+========================
+
+
+

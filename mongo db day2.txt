@@ -1,0 +1,149 @@
+=========
+q1
+=======
+
+1)delete all records in a collection
+
+db.members.deleteMany({
+})
+
+
+==================
+droap a collection
+==================
+db.members.drop()
+
+==============
+drop database
+==============
+db.dropDatabase()
+
+
+Find all shows whose name contains the word “Last” 
+db.shows.find({
+name:/Last/
+
+}).count()
+
+==========================
+case insensitive
+=========================
+db.shows.find({
+
+name:/last/i
+}).count()
+
+========================
+db.shows.find({
+name:{
+$regex:"Man"
+}
+}).count()
+
+===========================
+
+================
+Find all shows whose weight is more than 10 times their average rating
+=============
+(weight)>(10*rating.average)
+
+
+==============================
+ans
+====
+
+
+db.shows.find({
+name:{
+$regex:"Man"
+}
+}).count()
+4
+db.shows.find(
+{
+//filter clause
+$expr: {
+  $gt:[
+  "$weight",
+    {
+  $multiply:[10,"$rating.average"]
+    }
+      ]
+        }
+
+},
+
+{
+//projection clause
+
+_id:0,
+name:1,
+weight:1,
+"rating.average":1
+
+})
+
+
+===================================
+Find all shows where 8% of the weight (0.08 * weight) is less than the average 
+rating value. Make sure the average rating is not null.
+=================================
+
+
+db.shows.find(
+  {
+ "rating.average":{
+$ne:null
+} 
+
+}
+,
+{
+$expr:{
+$lt:[
+  {$multiply:[0.08*"$weight"]
+  },
+  "$rating.average"
+]
+
+}
+
+
+})
+
+============================
+Array query operators 
+i) Find shows that have BOTH Drama and Horror as their genre. Use $all.
+=============================
+db.shows.find({
+genres:{
+$all:['Drama','Horror']
+}
+})
+
+=============
+
+Find shows that are scheduled on both "Monday" and "Tuesday"
+==================
+
+1)db.shows.find({
+
+$and:[
+              {
+  "schedule.days":"Monday"
+},
+              {
+"schedule.days":"Tuesday"
+}
+
+]
+
+}).count()
+
+2)
+db.shows.find({
+ "schedule.days":{
+$all:["Monday","Tuesday"]
+}
+
+}).count()

@@ -1,0 +1,22 @@
+===============================
+Communicating independently
+===============================
+1)can be done with the signal and shareData services
+
+2)Toast==>>appears for few seconds and then disappear
+
+=======================================
+new way to inject an service Angular 17
+========================================
+import{ToastService} from './toast.service';
+import {inject} from 'angular/core'
+export class ToastComponent{
+
+private toastService=inject(ToastService);
+
+}
+
+=========================================
+ngb-Toast has a property of self closing
+==========================================
+explore toast management in angular bootstrap

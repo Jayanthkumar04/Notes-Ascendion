@@ -1,0 +1,42 @@
+jest.mock() // module mocking
+
+jest.fn()   // only one function
+
+expect(arithmetic.sum.mock.calls[0][0]).toBe(1);
+
+[0][0] when sum called for the first time  it must be value 1
+
+expect(arithmetic.sum.mock.calls[0][1]).toBe(1);
+second argunment for first time is 1;
+
+
+to render ==>  shallow or mount
+
+shallow(<Counter/>)=>if component has child components wont be visible
+
+mount()==>
+
+
+snapshot testing===>
+1) will check html correctly arranged or not
+2) lib is react test renderer
+3) 
+   panel 
+  panel-heading
+panel body these are the children
+
+==================
+for asynchronuous
+==================
+
+fakeTimers()==>for skipping thingsss
+
+mockingTimers()==>
+
+ to skip ==>done()
+
+cypress()=>automate tool
+puppeteer() => end - to - end automation testing
+
+
+  

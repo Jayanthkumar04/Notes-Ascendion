@@ -1,0 +1,58 @@
+=====================
+calling backend
+=====================
+
+1)we use HttpClient to fetch api data
+
+==>To use this we need to include provideHttpClient() method in app.config.ts
+
+2)when api called it returns a observable object
+
+3)we need to subscribe to it and it has a method next
+=============================================
+export class WorkshopsService {
+
+  constructor(private http: HttpClient) {
+  }
+
+  getWorkshops() {
+    return this.http.get(`https://workshops-server.onrender.com/workshop`);
+  }
+=============================================
+workshop-list.componenet.ts
+==============================
+constructor(private w: WorkshopsService) {
+    w.getWorkshops().subscribe({
+      next: (workshops) => {
+        console.log(workshops);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+============================
+app.config   //This is must ********
+===========
+ providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(workshopsRoutes),
+    provideRouter(routes),
+
+    provideHttpClient(),
+  ],
+
+==============================================
+Make sure you have to say data cmg is not null
+==============================================
+ workshops!: IWorkshop[];
+
+============================================
+Tell angular that data from api is specific
+============================================
+in service.ts
+=============
+return this.http.get<IWorkshop[]>(
+      `https://workshops-server.onrender.com/workshops`
+    );

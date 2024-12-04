@@ -1,0 +1,49 @@
+========================
+create new react app
+========================
+1)npx create-react-app workshops-app
+
+========
+router
+========
+npm i react-router-dom@6
+
+sfc and enter for creating componente
+
+
+const Home = () => {
+  return (
+<>
+<div>Home</div>;
+
+<div> Hello</div>  there must onlu one top level element
+<>
+)
+};
+
+=============
+
+add bootstrap
+
+==============
+
+=================
+
+add class in index.js
+
+===================
+
+
+npm i axios
+
+axios like httpclient
+
+useState ==>
+  for getting the state
+  
+it has 2 array members i)[] array  ii) some function
+
+==>base class of all classes is component
+
+==>
+

@@ -1,0 +1,68 @@
+=====================
+CREATING AUTH SERVICE
+=====================
+1)export class LoginComponent implements OnInit {
+    credentials: any = {
+        email: 'john.doe@example.com',
+        password: 'Password123#',
+    };
+
+============================
+
+2)export class AuthService {
+    private apiUrl = environment.apiUrl;
+    constructor(private http: HttpClient) {}
+    login(credentials: any) {
+        return this.http.post<any>(`${this.apiUrl}/login`, credentials, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    }
+================================
+
+3)login() {
+        this.authService.login(this.credentials).subscribe({
+            next: (loginResponse) => {
+                this.router.navigateByUrl('/workshops');
+            },
+            error: (error) => {
+                alert(`Either email or password is incorrect`);
+            },
+        });
+    }
+======================================
+INTERCEPTORR
+======================================
+4)store the token in localstorage;
+
+  submit(form: NgForm) {
+    this.authService.login(this.credentials).subscribe({
+      next: (loginResponse) => {
+        localStorage.setItem('Authorization', loginResponse.token);
+
+        this.router.navigateByUrl('/calender');
+        console.log(loginResponse);
+      },
+
+=======================
+
+5)CREATE INTERCEPTOR
+
+  I)register interceptor in app.config
+    provideHttpClient(withInterceptors([customInterceptor])),
+
+
+ii)costomize the interceptor as below
+
+export const customInterceptor: HttpInterceptorFn = (req, next) => {
+  const myToken = localStorage.getItem('Authorization');
+
+  const cloneRequest = req.clone({
+    setHeaders: {
+      Authorization: `${myToken}`,
+    },
+  });
+
+  return next(cloneRequest);
+};

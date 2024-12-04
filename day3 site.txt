@@ -1,0 +1,16 @@
+==============================
+Event browsing and search
+==============================
+Description: Users can browse for the events in the particular location
+inputs :Location name
+Outputs: Display of relevant events in the particular location.
+Functional Details:
+             It must show the event name with images related to even and a brief description.
+               
+
+==============
+start an event
+==============
+Description:Users can start an event
+inputs : Description of an event,location of an even,paid event or unpaid event
+outputs :

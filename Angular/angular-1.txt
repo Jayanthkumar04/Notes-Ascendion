@@ -1,0 +1,109 @@
+download angular bootsrap and include it in the app.css
+
+while including ngbcollape make it true and include ngbcollapse
+
+
+==============
+
+ROUTING
+
+===============
+
+===============
+1)linking pages
+===============
+export const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+  },
+  {
+    path: 'workshops',
+    component: WorkshopsListComponent,
+  },
+];
+
+================
+app-component.ts
+=================
+<div class="container">
+  <!-- <app-home> </app-home> -->
+
+  <router-outlet></router-outlet>
+</div>
+
+
+==============================================
+==================
+Router Link
+==================
+When we use href then when link is clicked it will render all html css and js files
+
+to not get all those stuff we use "routerLink"
+==========================
+<li class="nav-item">
+          <a class="nav-link" routerLink="/" >Home</a>
+        </li>
+===============================================
+
+=============================================
+RouterLinkActive  and RouterLinkActiveOptions
+==============================================
+<a            class="nav-link"
+              ngbDropdownItem
+              routerLink="/workshops/favorites"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >Favourites</a
+            >
+===============================================
+
+=====================
+Styling active links see above example
+=====================
+
+.nav-link.active {
+  color: red;
+}
+
+========================
+if some wrong link given
+========================
+app.routes.ts
+  {
+    path: '**',
+    component: PageNotFoundComponent,
+  },
+
+====================
+page-not-fount.html
+====================
+<p class="display">
+  The page you are looking for does not exist.You can try going to
+
+  <a routerLink="">Home</a>,or check the
+  <a routerLink="/workshops">List of workshops</a>
+</p>
+
+=================================
+redirecting to the particular thing
+=================================
+
+{
+    path: '',
+    component: HomeComponent,
+  },
+  {
+    path: 'home',
+    redirectTo: '',
+    pathMatch: 'full',
+  },
+
+========================================
+If new routing files added
+================================
+1)impot below in app.config file
+
+import { routes as workshopRoutes } from './workshops.routes';
+
+and add provideRouter(workshopRoutes), in app.config

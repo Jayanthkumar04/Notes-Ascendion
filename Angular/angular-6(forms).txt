@@ -1,0 +1,306 @@
+1)Add Forms Module  from {angular/forms}
+=======================
+
+2)NgModel
+===============================================
+<input
+            type="text"
+            class="form-control"
+            id="sequenceId"
+            name="sequenceId"
+            required
+            pattern="\d+"
+            ngModel
+            #sequenceId="ngModel"
+            autocomplete="off"
+        />
+autocomplete="on" => will give value suggestions
+                     based on previous values
+===============================================
+3)<div>{{ "sequenceId.invalid = " + sequenceId.invalid }}</div>
+    <div>{{ "sequenceId.valid = " + sequenceId.valid }}</div>
+    <div>{{ "sequenceId.dirty =" + sequenceId.dirty }}</div>
+    <div>{{ "sequenceId.touched =" + sequenceId.touched }}</div>
+
+==============================================
+4)printing errors
+=============================================
+@if ( sequenceId.invalid && ( sequenceId.touched || sequenceId.dirty) &&
+    sequenceId.errors){
+    <div class="error-message">
+      @if(sequenceId.errors['required']){
+      <div>This is required</div>
+      } @if(sequenceId.errors['pattern']){
+      <div>Provide a number</div>
+      }
+    </div>
+    }
+===========================
+5)reading form values and passing it to method in ts file
+===========================
+i)#addSessionForm="ngForm"
+ii)(ngSubmit)="addSession(addSessionForm)"
+
+iii)
+<form
+  id="add-session-form"
+  #addSessionForm="ngForm"
+  (ngSubmit)="addSession(addSessionForm)"
+>
+
+addSessionForm.invalid
+addSessionForm.valid
+addSessionForm.touched
+addSessionForm.dirty
+
+
+iv)function()
+ addSession(addSessionForm: NgForm) {
+    
+  }
+
+v)ddSession(addSessionForm: NgForm) {
+    const newSession = {
+      ...addSessionForm.value,//spread operator to cpy array value
+      sequenceId: +addSessionForm.value.sequenceId,
+    };
+
+    console.log(newSession);
+  }
+}
+=================================
+
+SENDING POST REQUEST
+
+==================================
+
+addSession(session: Omit<ISession, 'id'>) {
+    return this.http.post<ISession>(
+      `https://workshops-server.onrender.com/sessions`,
+      1)session,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
+
+====
+i)omit will ignore some fields
+====
+
+===
+ii)1)session is an object cmng from ts file
+===
+
+===
+iii) add headers:{'content-type':'application/json'
+====
+=======
+tsfile
+=======
+ addSession(addSessionForm: NgForm) {
+    const id = +(this.activatedRoute.snapshot.parent?.paramMap.get(
+      'id'
+    ) as string);
+
+    //already seen code
+    this.sessionService.addSession(newSession).subscribe({
+      next: (addSession) => {
+        alert('new session added successfully');
+
+        this.router.navigate(['/workshops', id]);
+      },
+    });
+  }
+
+i)snap shot will get the parent url 
+
+ii)after posting it has to navigate to workshops/1
+
+===================================
+
+<div class="d-flex justify-content-between align-items-center">
+  <h2 class="my-3">Add a session</h2>
+  <button class="btn btn-primary" id="list-sessions">List of sessions</button>
+</div>
+<hr />
+
+<form
+  id="add-session-form"
+  #addSessionForm="ngForm"
+  (ngSubmit)="addSession(addSessionForm)"
+>
+  
+      <div>valid = {{ addSessionForm.valid | json }}</div>
+      <div>invalid = {{ addSessionForm.invalid | json }}</div>
+      <div>value = {{ addSessionForm.value | json }}</div>
+      Similarly we have dirty, touched on form
+  
+
+  <div class="mb-3">
+    <label for="sequenceId" class="form-label">Sequence ID</label>
+    <!--
+          Once we add ngModel directive to an input, Angular maintains an NgModel object that holds the user input, the validity status (based on attributes like required, pattern, min, max etc. that we set on the input), the touched, dirty status etc.
+
+          The tenplate reference variable by deault refers to the DOM node. Set it to ngModel to gte a reference to the NgModel object
+       -->
+    <input
+      type="text"
+      class="form-control"
+      id="sequenceId"
+      required
+      pattern="\d+"
+      name="sequenceId"
+      ngModel
+      #sequenceId="ngModel"
+      autocomplete="off"
+    />
+    <!-- We use json pipe to show objects in the UI -> -->
+
+    <!--
+      {{ sequenceId.errors | json }}
+      {{ sequenceId.value }}
+      <div>{{ "sequenceId.invalid = " + sequenceId.invalid }}</div>
+      <div>{{ "sequenceId.valid = " + sequenceId.valid }}</div>
+      <div>{{ "sequenceId.dirty =" + sequenceId.dirty }}</div>
+      <div>{{ "sequenceId.touched =" + sequenceId.touched }}</div>
+      -->
+    @if( sequenceId.invalid && ( sequenceId.touched || sequenceId.dirty ) &&
+    sequenceId.errors ) {
+    <div class="error-message">
+      @if(sequenceId.errors['required']) {
+      <div>This is required</div>
+      } @if(sequenceId.errors['pattern']) {
+      <div>Provide a number</div>
+      }
+    </div>
+    }
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="name"
+      required
+      pattern="[A-Z][A-Za-z ]+"
+      ngModel
+      #name="ngModel"
+    />
+    @if( name.invalid && ( name.touched || name.dirty ) && name.errors ) {
+    <div class="error-message">
+      @if(name.errors['required']) {
+      <div>This is required</div>
+      } @if(name.errors['pattern']) {
+      <div>Provide a valid name (only letters and spaces)</div>
+      }
+    </div>
+    }
+  </div>
+  <div class="mb-3">
+    <label for="speaker" class="form-label">Speaker</label>
+    <input
+      type="text"
+      class="form-control"
+      id="speaker"
+      required
+      pattern="[A-Z][A-Za-z ]+(,[A-Z ][A-Za-z ]+)*"
+      name="speaker"
+      ngModel
+      #speaker="ngModel"
+    />
+    @if( speaker.invalid && ( speaker.touched || speaker.dirty ) &&
+    speaker.errors ) {
+    <div class="error-message">
+      @if(speaker.errors['required']) {
+      <div>This is required</div>
+      } @if(speaker.errors['pattern']) {
+      <div>
+        Provide valid names (only letters and spaces for names, and separate
+        names by commas)
+      </div>
+      }
+    </div>
+    }
+  </div>
+  <div class="mb-3">
+    <label for="duration" class="form-label">Duration</label>
+    <input
+      type="number"
+      class="form-control"
+      id="duration"
+      required
+      min="0.5"
+      max="10"
+      name="duration"
+      ngModel
+      #duration="ngModel"
+    />
+    @if( duration.invalid && ( duration.touched || duration.dirty ) &&
+    duration.errors ) {
+    <div class="error-message">
+      @if(duration.errors['required']) {
+      <div>This is required</div>
+      } @if(duration.errors['min']) {
+      <div>Duration is minimum 0.5</div>
+      } @if(duration.errors['max']) {
+      <div>Duration is maximum 10</div>
+      }
+    </div>
+    }
+  </div>
+  <div class="mb-3">
+    <label for="level" class="form-label">Level</label>
+    <select
+      class="form-select"
+      id="level"
+      required
+      name="level"
+      ngModel
+      #level="ngModel"
+    >
+      <option value="Basic">Basic</option>
+      <option value="Intermediate">Intermediate</option>
+      <option value="Advanced">Advanced</option>
+    </select>
+    @if( level.invalid && ( level.touched || level.dirty ) && level.errors ) {
+    <div class="error-message">
+      @if(level.errors['required']) {
+      <div>This is required</div>
+      }
+    </div>
+    }
+  </div>
+  <div class="mb-3">
+    <label for="abstract" class="form-label">Abstract</label>
+    <textarea
+      class="form-control"
+      id="abstract"
+      rows="3"
+      required
+      minlength="20"
+      ngModel
+      name="abstract"
+      #abstract="ngModel"
+    ></textarea>
+    @if( abstract.invalid && ( abstract.touched || abstract.dirty ) &&
+    abstract.errors ) {
+    <div class="error-message">
+      @if(abstract.errors['required']) {
+      <div>This is required</div>
+      } @if(abstract.errors['minlength']) {
+      <div>Minimum 20 characters needed</div>
+      }
+    </div>
+    }
+  </div>
+  <div class="mb-3">
+    <button class="btn btn-primary" [disabled]="addSessionForm.invalid">
+      Add session
+    </button>
+  </div>
+</form>
+

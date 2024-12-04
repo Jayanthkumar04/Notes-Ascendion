@@ -1,0 +1,31 @@
+1)STRING.JOIN(delimeter,iterable)
+
+2)
+  //Printing from last
+  Console.WriteLine("from last index");
+  Console.WriteLine(names[^1]);
+
+3)Two dimensional
+
+  //int[,] ans = { { 1, 2, 3 }, { 4, 5, 6 } };
+
+   int[,] ans = new int[2, 3]
+==============================
+   getting rows and cols
+==============================
+
+int rows = arr.GetLength(0);
+int cols = arr.GetLength(1);
+
+for(int i=0;i<rows;i++)
+{
+    for(int j=0;j<cols;j++)
+    {
+        if (arr[i,j] > max)
+        {
+            max = arr[i, j];
+        }
+    }
+}
+
+============================

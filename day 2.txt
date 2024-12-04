@@ -1,0 +1,247 @@
+CSS=>CASCADING=(STYLE APPLIED ONE AFTER THE OTHER)
+
+our style takes preference over the browser styless
+
+block level will take entire space given by the parent
+
+list also block level element
+
+
+inline elements cannot be given width
+
+
+inline-block can be given width
+
+
+content ==>bluee
+
+padding ==> green
+
+border ==>brown
+
+margin ==>orange
+
+=====================
+Semantic tags==> are those which convey informantion about the content
+nav is semantic tag
+
+header,
+main,
+footer
+section
+
+&copy ==> @ symboll
+
+=======================
+explore article tagg
+=======================
+will have heading tage and info about it
+<h1>
+  <h3>
+    <p>
+=======================================
+dont use tables for arranging things on the webpage
+=========================================================
+======
+tables
+======
+
+border-collapse (for table)
+rowspan  (downwards)
+colspan  (side warsd
+
+
+=====================
+running in the server
+=====================
+all js librariries will be in npmjs website
+
+npm init -y will install package.json
+
+npm i http-server (these all will get stored in the node_moduless)
+
+to run in server ==> http server  (all will get stored in node_modules)
+
+(to run in local)  in package.json ==>under scriptss=>{
+                                                       mention=>
+                                                          "start":"http-server"
+}
+
+to run throug script ==> npm run start
+
+==>dont cache
+{
+scripts{
+"start":"http-server -c-1"
+}
+
+==================================================
+
+external css
+
+<link rel="stylesheet" href="css/style.css">
+
+==================================================
+
+CSS
+
+html =>will load into the browser
+
+The three primary types of CSS are:
+Inline CSS: Apply style rules directly to specific elements within the HTML.
+Internal or Embedded CSS: Add a `` tag in the `` section of the HTML document.
+External CSS: Link the HTML sheet to a separate `.css` file.
+
+
+========================================================
+SELECTORS
+=================================================
+
+section > a{
+color:green;
+}
+
+a must be immediate child of section.
+
+=======================================
+section ~ a{
+
+}
+The general sibling selector (~) selects all elements that are next siblings of a specified element.
+div ~ p {
+  background-color: yellow;
+}
+
+<p>Paragraph 1.</p>
+
+<div>
+  <p>Paragraph 2.</p>
+</div>
+
+<p>Paragraph 3.</p>  //style applied here
+<code>Some code.</code>
+<p>Paragraph 4.</p>  //style applied here
+
+</body>
+</html>
+===================================
+section + a{
+
+}
+The + selector is used to select an element that is directly after another specific element.
+
+div + p {
+  background-color: yellow;
+}
+<div>
+  <p>Paragraph 1 in the div.</p>
+  <p>Paragraph 2 in the div.</p>
+</div>
+
+<p>Paragraph 3. After a div.</p>  ///style applied here
+<p>Paragraph 4. After a div.</p>
+
+<div>
+  <p>Paragraph 5 in the div.</p>
+  <p>Paragraph 6 in the div.</p>
+</div>
+
+<p>Paragraph 7. After a div.</p>  // style applied here
+<p>Paragraph 8. After a div.</p>
+
+</body>
+</html>
+=======================
+EMMET
+======================
+
+p*3>lorem
+
+==============================
+PSEUDO SELECTORS
+==============================
+	
+
+p:nth-child(1){
+
+}
+
+p:last-child{
+
+}
+
+===================================
+CONFLICTS IN STYLING
+===================================
+
+
+INLINE> ID > CLASS >
+
+SPECIFICITY==>
+(A,B,C,D)
+A-->INLINE
+B-->ID
+C-->CLASS
+D-->ELEMENTS
+
+
+
+========================
+UNITS
+====================
+absolute(cm,mm,px)
+relative units
+1)rem
+2)em
+3)vh
+4)
+
+============
+box model
+============
+
+if margin top and margin bottom given it takes max of two not both
+(if two elements margins are collapsing then takes one which is maximum it is called as "margin-collapse")
+
+
+total width=width+left padding+right padding+left border+right border+left margin+right margin
+
+total height=height+ top padding+bottom padding+top border+bottom border+top margin+bottom margin
+
+====> if box-sizing:border-box;
+      then if height mentioned (including content, padding and border size comes to height mentioned)
+once look it in utube
+
+================
+display
+================
+display:none  (it shows nothing and it dont occupies)
+
+visibility:hidden(it shows nothing and it occupies space)
+
+
+====================
+overflow properties
+=====================
+
+if overflowing out of the box then use
+{
+overflow:scroll
+}
+
+if dont want to break in the horizontal direction then use white-space=nowrap
+
+{
+white-space:nowrap
+white-space:break-spaces
+whit-space:initial
+}
+
+===========
+colors
+===========
+types of color
+
+====
+
+line-height:3
