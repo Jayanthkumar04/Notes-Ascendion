@@ -1,0 +1,15 @@
+Out and ref are used to pass the variable by reference
+
+===
+ref
+===
+
+no need to initialize it again
+previous value can be reassigned
+
+===
+out
+===
+initial value is to be initialized and then reassign the value
+
+

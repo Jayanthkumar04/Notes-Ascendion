@@ -1,92 +1,96 @@
-=============
-INTRODUCTION
-=============
+// int, float, double, char, bool, decimal (we use it for currency), byte (numbers), short, ushort, long
 
-1)can build web apis , desktop apps , crossplatform applications(run on diff os)
+// string is not primtive, but behaves like a primitive
 
-2).net core mvc .........
+by default ==> private
 
-3)ecommerce sites , content management system
+int _number = 100; // for private
+int @int = 1000; // for variables with keyword as name prefix with @
 
-4)Game development
+var x = 100; // if we give an initial value, we can use var to let the compiler interpret the data type
 
-5)if written in any lang .net =>it is converted to a form called common language 
+decimal cost = 2.50m; // 
+
+int quantityOfBooksInt = int.Parse(quantityOfBooks);
+
+Console.WriteLine(string.Join(", ", names)); // "John Doe, Jane, Mark, Mary"
+
+=====================
+Accessing in Reverse
+=====================
+ Console.WriteLine(names[^1]); // 1-based index for accessing from the end
 
 
-6)we r gng to work with .net 8..
+for(int i=1;i<=arr.Length;i++)
+        {
+            Console.WriteLine(arr[^i]);
+        }
+======================
 
-7)asp .net core
+======================
+// get range of array items - includes start index item, excludes end index item
+var someNames = names[1..3]; // { "Jane", "Mark" }
 
-=================
-Methods
-=================
 
-1)console.WriteLine("text");  Write
-                              Line
+==================
+
+2D ARRAY
+
+===================
+
+int[,] matrix = new int[2, 3] 
+		{
+			{ 1, 2, 3 },
+            { 4, 5, 6 }
+        };
+
+
+Console.WriteLine(matrix.GetLength(0));//rows
+Console.WriteLine(matrix.GetLength(1));//cols
+
+=========
+switch case
+======
+
+You can use relational operator in case expression (case <= 5)
+
+switch(units)
+            {
+                case < 50 :
+                    return units * 0.20;
+                    break;
+            
+             default:
+                    double four = units - 200;
+                    return (50 * 0.20) + (50 * 0.25) + (100 * 0.30) + (four * 0.35);
+                    break;
+
+}
+
+================
+namespace
+================
+// if we use this syntax then we can define multiple namespaces in a single file
+
+namespace Demo
+{
+
+public class cccc{
+
+
+
+}
+
 ===========
-variables
+Enumeration
 ============
+public enum Days{
+    
+    monday,tuesday,wednesday,thursday
+}
 
-2)int , float , double , 
+consists of a set of named constants called the enumerator list. Enums are used to represent a collection of related constants in a more readable and maintainable way
 
-  char, Boolean, decimal(used for currency)
-
-  signed(--ive will be)
-
-  byte(numbers) ,short , ushort, long
-===========
-non primitive
 ==============
 
-1)string,
-
-
-=============
-SHORTCUTS
-=============
-CW+tab+tab ==> console.WriteLine()
-
-try+tab+tab ==> will give try catch block
-====================
-Namining conventions
-=====================
-1
-//variables with keyword as name prefix with @
-
-2)MethodName()
-
-3)normalVariable
-
-4)_privateField
-
-5)publicField
-
-====================
-Converting datatypes int.parse(variable)
-====================
-
-string a="100";
-
-int b = int.parse(a);
-
-=============================
-internal imple
-=============================
-
-1)when runned
-
-to run exe file ./file_name
-
-========
-class
-=======
-
-namespace Demo;
-
-public class Demo
-{
-    public static void Main(string[] args)
-    {
-
-    }
-}
+==============

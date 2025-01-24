@@ -1,0 +1,11 @@
+npm run start:skip-seed
+
+{
+  "username": "jayanthkumar598@gmail.com",
+  "password": "Jayanth@04"
+}
+
+
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJqYXlhbnRoa3VtYXI1OThAZ21haWwuY29tIiwic3ViIjoiYWI4ODBmNjUtYmRmYy00NjIwLWFmYjctNWE1Y2Y4Yzk2MGYxIiwiZXhwIjoxNzM1MDI2NTU5LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MDAzLyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMDMvIn0.9sSWh37QWLUochENcQi68Ec0-qDgE_FKW_zfsnPo9Fw
+
+WE HAVE TO ENABLE COORS ISSUE IN PROGRAM.CS

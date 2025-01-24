@@ -1,0 +1,41 @@
+GAN'S(Generative adversarial networks)
+
+i)Generator
+
+ii)Discriminator
+
+2) i)image synthesis - canva
+   ii) text translation - canva
+   iii) Music composition - Riffusion
+
+
+CHATGPT developed by OPENAI  based on 
+
+GPT(Generative Pretrained Transformer)
+
+continually improving based upon user feedback and interactions
+
+=====
+NLP
+=====
+Natural Language Processing (NLP) is a branch of artificial intelligence that focuses on enabling computers to understand and interact with human language.
+
+1)recognizes pattern in language
+2)understands syntax and grammar of lang
+3)detect emotions or sentiments
+
+============
+TERMINOLOGY
+============
+
+1)Tokenization
+  **breaking down text into smaller linguistic units
+
+   =>Sentiment Analysis
+   =>Language Translation
+   => Text Summarization
+
+2)Word Embedding
+
+3)Corpus
+
