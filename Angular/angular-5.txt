@@ -69,8 +69,10 @@ ROUTES.TS
         title: 'Workshop Details',
         children: [
             {
+
                 path: '', // same as parent route
                 component: SessionsListComponent,
+
             },
             {
                 path: 'add-session',

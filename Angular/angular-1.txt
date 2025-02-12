@@ -101,7 +101,7 @@ redirecting to the particular thing
 
 ========================================
 If new routing files added
-================================
+========================================
 1)impot below in app.config file
 
 import { routes as workshopRoutes } from './workshops.routes';

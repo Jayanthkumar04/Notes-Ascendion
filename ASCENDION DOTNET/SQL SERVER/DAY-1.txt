@@ -1,0 +1,41 @@
+=================================================================
+
+1)not null 2)primary key 3)unique 4)check 5)identity 6)default
+
+=================================================================
+
+=============================
+CTRL+H (FIND AND REPLACE)
+=============================
+
+
+
+=========================================
+IDENTITY,USING CHECK, NOT NULL , DEFAULT
+=========================================
+CREATE TABLE cars
+(
+  id INT PRIMARY KEY IDENTITY(1,1),
+
+  cost int CHECK(cost > 300000 and cost <=1000000),
+
+  company varchar(20) CHECK(company in ('maruti','audi','benz')),
+
+  quantity int default 1
+
+);
+
+===================================================
+
+adding constraint 
+
+====================================================
+
+CREATE TABLE customers
+(
+  id INT,
+  name VARCHAR(20),
+  carId INT,
+  FOREIGN KEY (carId) REFERENCES cars(id),
+  CONSTRAINT PK_Customers PRIMARY KEY (id, name)
+);

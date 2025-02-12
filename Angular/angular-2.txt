@@ -39,7 +39,7 @@ app.config   //This is must ********
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(workshopsRoutes),
     provideRouter(routes),
-
+c
     provideHttpClient(),
   ],
 

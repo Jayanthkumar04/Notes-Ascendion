@@ -1,0 +1,224 @@
+
+=================
+3 types of files
+=================
+
+1)log file  2) primary file
+
+=========================
+
+============================
+
+CREATE DATABASE NAME ON PRIMARY
+(
+
+NAME='name' ,FILENAME='file location/.mdf',size=4MB , MAXSIZE=32MB)
+
+LOG ON
+
+(NAME='name',FILENAME='fileloc/.ldf',size=4MB , MAXSIZE=32MB)
+
+============
+example
+===========
+
+CREATE DATABASE DAY2DB ON PRIMARY
+(NAME='DAY2DB',FILENAME='C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\DAY2DB.mdf')
+
+LOG ON
+
+(NAME='DAY2DB_log', FILENAME='C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\DAY2DB_log.ldf')
+
+================================
+================================
+
+==================
+AS and Persisted
+==================
+
+CREATE TABLE SALARYCalc
+(
+Grade varchar(1) PRIMARY KEY,
+
+BasicSalary float,
+HRA AS BasicSalary * 0.1 persisted,
+DA AS BasicSalary * 0.2 persisted,
+TA AS BasicSalary * 0.15 persisted
+
+);
+
+persisted mean all are computed values, updations cant be performed on persisted columns
+
+when updated with value all will be updated 
+
+
+=====================
+aggregate functions
+=====================
+select avg(salary) as 'AVERAGE SALARY' from emp;  //as is not must
+
+===================
+--STRING RELATED
+=================
+SELECT UPPER('jayanth') AS 'EX OF UPPER CASE';
+
+SELECT LTRIM('  JAYANTH   ') AS 'LTRIM' ;
+
+SELECT RTRIM('       JAYANTH   ') AS 'RTRIM' ;
+
+SELECT TRIM('       JAYANTH   ') AS 'RTRIM' ;
+
+================
+concantenation
+==============
+
+SELECT upper(fname)+'  '+upper(lname) 'FULL NAME' FROM emp;
+
+SELECT fname,lname, left(fname,1)+' . '+left(lname,1)+' .'as 'INITIAL' FROM emp; 
+  output
+      ==> Jayanth , yadavalli , J. , Y.
+
+
+=================
+--DATE RELATED
+=================
+
+SELECT getDate() 'CURRENT DATE';
+
+SELECT DATEPART(YEAR,GETDATE()) 'Current Year';
+
+SELECT DATEPART(MONTH,GETDATE()) 'Current Month';
+
+SELECT DATEPART(DAY,GETDATE()) 'CURRENT DAY';
+
+SELECT DATEPART(DAYOFYEAR,GETDATE()) 'CURRENT DAY OF YEAR'
+
+SELECT DATEPART(WEEKDAY,GETDATE()) 'CURRENT WEEKDAY'
+
+SELECT DATEPART(WEEK,GETDATE()) 'CURRENT WEEK'
+
+SELECT DATEDIFF(YEAR,'12/12/2023','12/12/2026') 'Diff in Year'
+
+
+====================
+application
+====================
+
+
+
+select Fname+'->'+Lname from emp;
+
+select Fname+'->'+Lname+'->'+convert(nvarchar(50),salary) as 'emp details' from emp;
+
+
+===============
+INDEXING
+===============
+DATA RETRIVAL MAKES IT EASY
+
+TWO TYPES OF INDEXING
+1)CLUSTERED INDEXING  (only one cluster is created and it arranges in order and it will be queried)
+		      (only one cluster index can be created)
+
+2)non-clustered
+
+3) any no.of index can be created..
+
+
+======================================================
+CREATE CLUSTERED INDEX  cust_index on Customer(Id);
+
+SELECT *FROM Customer where Id = 2;
+CLTR+L ==> EXECUTION PLAN
+=======================================================
+CREATE NONCLUSTERED INDEX cust_NameIndex on Customer(Fname);
+
+CREATE index cust_LnIndex on Customer(Lname);
+
+select *from Customer where Fname = 'John';
+
+===========================================================
+
+=============
+schema
+=============
+A schema is a container or namespace for database objects, 
+ensuring that objects with the same name don't conflict across different schemas
+
+it is a logical name
+====================================================================
+====================================================================
+CREATE SCHEMA mySchema;
+
+create table mySchema.Customer(
+id int,
+salary float
+);
+======================
+Userdefined datatypes
+======================
+
+CREATE TYPE nametype FROM nvarchar(50) NOT NULL;
+
+CREATE TABLE DATATABLE
+(
+id INT,
+namee nametype
+);
+
+WE CAN USE USER DEFINED DATATYPE IN OTHER SCHEMAS BUT NOT IN OTHER DATABASED
+
+===========
+joins
+===========
+
+--inner join
+select e.Id,e.Fname,e.Lname,e.Designation, d.DId 'Department Id', d.DName 'Department Name' from 
+Emps e inner join Dept d on e.Department = d.DId;
+
+===============
+
+
+--left outer
+
+select e.Id,e.Fname,e.Lname,e.Designation, d.DId 'Department Id', d.DName 'Department Name' from 
+Emps e left outer join Dept d on e.Department = d.DId;
+
+--right outer join
+select e.Id,e.Fname,e.Lname,e.Designation, d.DId 'Department Id', d.DName 'Department Name' from 
+Emps e right outer join Dept d on e.Department = d.DId;
+
+--full outer join
+
+select e.Id,e.Fname,e.Lname,e.Designation, d.DId 'Department Id', d.DName 'Department Name' from 
+Emps e right outer join Dept d on e.Department = d.DId;
+
+--self join
+
+CREATE TABLE EMPLOYEES
+(
+EmployeeId INT PRIMARY KEY,
+EmployeeName nvarchar(100),
+ManagerId INT
+);
+
+INSERT INTO EMPLOYEES VALUES(1,'SAM',NULL),(2,'RAJ',1),(3,'ROHAN',1),(4,'VIKAS',2),(5,'DEV',2),(6,'RISHI',3);
+
+
+SELECT E.employeeName Employee,m.EmployeeName Manager FROM EMPLOYEES E 
+
+LEFT JOIN
+
+EMPLOYEES m ON e.ManagerId = m.EmployeeId;
+
+===========
+CRoss join
+===========
+n*m rows
+
+=>USED TO GET ALL POSSIBLE COMBINATIONSS....
+
+select Color,Size from COLORS cross join Sizes order by Color;
+
+
+

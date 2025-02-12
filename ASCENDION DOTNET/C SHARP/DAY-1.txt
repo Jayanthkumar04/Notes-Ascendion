@@ -1,0 +1,40 @@
+CLS
+
+CTS 
+CLR=>COMMON LANGUAGE RUNTIME
+
+FCL =>FRAMEWORK CLASS LIBRARRY
+
+CODE OUTSIDE CLR => UNMANAGED CODE
+            INSIDE=>MANAGED CODE
+
+
+======================================================
+VALUED TYPED DATA TYPE AND REFERENCE TYPED DATA TYPE
+
+=======================================================
+
+VALUED TYPED DEFAULT => 0 (STACK)
+
+REF TYPE  DEFAULT > NULL(HEAP)
+
+=============
+USER INPUT
+============
+
+console.readline(); (takes as string by default)
+
+ Integer.Parse(console.readline());
+ Double.Parse(console.readline());
+
+
+======================
+strings displaying
+======================
+Console.WriteLine($"Full Name:\t {fname} {lname} \n grade is {grade} \n fees is {fee}");
+
+Console.WriteLine("other way");
+
+Console.WriteLine("Full Name:\t {0} {1} \n grade is {2} \n fees is {3}",fname,lname,grade,fee);
+
+
