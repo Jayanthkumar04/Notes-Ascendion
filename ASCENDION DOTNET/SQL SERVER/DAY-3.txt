@@ -402,7 +402,93 @@ FOREIGN KEY(Sid) references Student(Sid) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
+CREATE TABLE PayConfirmation
+(
+Sid int,
+SName nvarchar(30),
+SEmail nvarchar(30),
+SFee int,
+PaidOnDate date
+);
 
+ALTER TRIGGER trgFeePayConfirmation
+ON Fee
+AFTER INSERT
+AS 
+
+DECLARE @Sid int,
+        @Name nvarchar(20),
+		@Email nvarchar(20),
+		@Fee int,
+		@PaidOnDate date
+
+select @Sid=inserted.Sid,@Fee=inserted.SFee, @PaidOnDate=GETDATE() from inserted;
+select @Name=SName ,@Email=SEmail from student where Sid=@Sid;
+insert into PayConfirmation values (@Sid,@Name,@Email,@Fee,@PaidOnDate)
+
+print 'RECORD HAS BEEN INSERTED SUCCESSFULLY'
+
+=======================
+=======================
+
+
+DML TRIGGERS CAN BE SEEN IN THE DATABASE
+
+DDL TRIGGERS CAN BE SEEN IN THE PROGRAMABILITY
+
+--DDL trigger
+--create trigger <trigger_name> ON {all server|database}
+--[with encryption]
+--{for|after}
+--{<event-type>}
+--AS <sql_statement>
+
+CREATE TRIGGER trgStopDrop
+on DATABASE
+AFTER Drop_Table
+AS
+PRINT 'you can not drop the table'
+PRINT 'To drop delete or disable trgstopdrop'
+rollback
+--------------------------
+
+CREATE TRIGGER trgStopDropCreateEvent
+on DATABASE
+AFTER Drop_Table,Create_Table,Alter_Table
+AS
+PRINT 'you can not drop the table'
+PRINT 'To drop delete or disable trgstopdrop'
+rollback;
+
+drop table Emps;
+
+
+====================
+VIEWS
+===================
+1)a virtual table made from read table
+
+
+create view stu_view 
+as
+select *from student;
+----------------------------------
+
+delete from stu_view where id=2;
+
+now if in view the record deleted then it will be deleted in real table also
+
+------------------------------------
+
+
+alter table student drop column Lname;
+
+after dropping if you want to see view it gives error
+---------------------------------------
+
+===============
+SCHEMA BINDING
+===============
 
 
 
