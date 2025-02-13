@@ -70,9 +70,9 @@ as
 BEGIN
 select *from Player where PId = @Id
 end;
-=======================
-built-in Procedures
-=======================
+===============================================
+built-in Procedures(system stored procedures)
+===============================================
 @@RowCount
 
 exec sp_tables;  //shows all tables
@@ -154,6 +154,37 @@ end
 -------------------
 select dbo.fnFullName('Ravi','kumar') 'FULL NAME';
 
+========
+EX-2
+=======
+CREATE TABLE bank.Customers
+(
+id int primary key identity(1000,1),
+fname nvarchar(50),
+lname nvarchar(50),
+contact nvarchar(50)
+);
+INSERT INTO bank.Customers (fname, lname, contact)
+VALUES
+    ('John', 'Doe', '555-1234'),
+    ('Jane', 'Smith', '555-5678'),
+    ('Michael', 'Johnson', '555-8765'),
+    ('Emily', 'Davis', '555-4321'),
+    ('David', 'Martinez', '555-7890');
+	select *from bank.Customers;
+	go
+CREATE FUNCTION bank.fnGnPwd 
+(@fn nvarchar(50),@id int,@ln nvarchar(50),@contact nvarchar(50))
+returns nvarchar(50)
+as
+BEGIN
+return right(@fn,2)+''+CONVERT(nvarchar(10),@id)+''+left(@ln,2)+''+@contact;
+end
+
+select fname,lname,contact,bank.fnGnPwd(fname,id,lname,contact) AS 'GENERATED PWD' from bank.Customers;
+========================
+=========================
+
 
 3)
 
@@ -225,7 +256,7 @@ SDate date not null,
 SEDate date not null
 );
 
-insert into Customer2(Id,Fname,Lname,SPlan,SDate,SEDate) VALUES (1,'jayanth','yadavalli',20000,'08/04/2001','02/12/2025');
+
 
 CREATE TABLE Customer2_Log
 (
@@ -261,6 +292,114 @@ VALUES(@id,@fn,@ln,@plan,@sdate,@edate,'RECORD INSERTED')
 PRINT 'RECORD INSERTED AND ACTION CAPTURED IN CUSTOMER-LOG'
 
 
+
+insert into Customer2(Id,Fname,Lname,SPlan,SDate,SEDate) VALUES (1,'jayanth','yadavalli',20000,'08/04/2001','02/12/2025');
+
+============
+UPDATE
+===========
+CREATE TRIGGER trgAfterCustUpdate 
+ON Customer2
+AFTER UPDATE
+AS
+DECLARE 
+    @id INT, 
+    @fn NVARCHAR(50), 
+    @ln NVARCHAR(50), 
+    @plan FLOAT, 
+    @sdate DATE, 
+    @edate DATE,
+    @action NVARCHAR(10)
+    
+-- Capture the updated values from the inserted and deleted pseudo-tables
+SELECT 
+    @id = inserted.Id,
+    @fn = inserted.Fname,
+    @ln = inserted.Lname,
+    @plan = inserted.SPlan,
+    @sdate = inserted.SDate,
+    @edate = inserted.SEDate
+FROM inserted
+
+-- Capture the deleted (previous) values from the deleted pseudo-table (before update)
+SELECT 
+    @action = 'RECORD UPDATED'
+FROM deleted
+
+-- Insert the changes into the log table
+INSERT INTO Customer2_Log (Id, Fname, Lname, SPlan, SDate, SEDate, ActionTaken)
+VALUES (@id, @fn, @ln, @plan, @sdate, @edate, @action)
+
+PRINT 'RECORD UPDATED AND ACTION CAPTURED IN CUSTOMER-LOG'
+
+=========
+DELETE
+========
+CREATE TRIGGER trgAfterCustDelete
+ON Customer2
+AFTER DELETE
+AS
+DECLARE 
+    @id INT, 
+    @fn NVARCHAR(50), 
+    @ln NVARCHAR(50), 
+    @plan FLOAT, 
+    @sdate DATE, 
+    @edate DATE,
+    @action NVARCHAR(10)
+
+-- Capture the deleted values from the deleted pseudo-table
+SELECT 
+    @id = deleted.Id,
+    @fn = deleted.Fname,
+    @ln = deleted.Lname,
+    @plan = deleted.SPlan,
+    @sdate = deleted.SDate,
+    @edate = deleted.SEDate
+FROM deleted
+
+-- Log the deletion into the log table
+SET @action = 'RECORD DELETED'
+
+INSERT INTO Customer2_Log (Id, Fname, Lname, SPlan, SDate, SEDate, ActionTaken)
+VALUES (@id, @fn, @ln, @plan, @sdate, @edate, @action)
+
+PRINT 'RECORD DELETED AND ACTION CAPTURED IN CUSTOMER-LOG'
+
+
+=================================
+IF WE WANT BEFORE RECORED USE ,,
+ BEFORE UPDATE
+ BEFORE DELETE
+=================================
+
+===================
+INSTEAD OF TRIGGER
+===================
+==============
+raise error()
+==============
+
+=========================================
+on delete cascade and on update cascade
+=========================================
+CREATE TABLE Student
+(
+Sid int PRIMARY KEY,
+SName nvarchar(20),
+SEmail nvarchar(20),
+SContact nvarchar(20)
+);
+
+CREATE TABLE Fee
+(
+Sid int,
+SFee int,
+SMonth int,
+SYear int,
+constraint Fee_PK primary key(Sid,SMonth,SYear),
+FOREIGN KEY(Sid) references Student(Sid) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 
 
