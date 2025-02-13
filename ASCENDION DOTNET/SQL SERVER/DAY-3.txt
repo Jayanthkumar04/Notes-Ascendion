@@ -1,0 +1,271 @@
+=====================
+STORED PROCEDURES
+=====================
+1)BUILT-IN STO. PRO.. 2)USER-DEFINED ST..PRO..
+
+=>GROUP OF TRANSACT-SQL STATEMENTS THAT ACT AS SINGLE BLOCK OF CODE THAT PERFORMS A SPECIFIC TASK
+
+=>IT PROVIDES SECURITY OUTSIDERS CANT INJECT ANY QUERY
+
+=======
+SYNTAX
+=======
+=====================
+1)CREATING PROCEDURE
+=====================
+create procedure <proc-name>
+
+parameters
+
+as
+
+begin
+
+sql statements
+
+end
+==============================
+CREATE PROCEDURE usp_AllPlayers
+AS
+BEGIN
+SELECT PID 'Player Id', PName 'Player Name',PAvg 'Player avg', PTeam 'Player Team' FROM Player;
+END
+==============================
+
+=======================
+2)Executing Procedures
+=======================
+exec <proc-name>
+
+EXEC usp_AllPlayers;
+
+INSERT INTO Player values (4,'ABD',76.56,'south africa');
+
+EXEC usp_AllPlayers;
+
+====================
+WITH PARAMETERS
+====================
+CREATE PROC usp_ParticularPlayer 
+@Id int
+as 
+BEGIN
+select *from Player where PId = @Id
+end;
+
+=====================
+EXECUTE usp_ParticularPlayer 2;
+
+EXECUTE usp_ParticularPlayer @Id=2;
+==========================
+
+
+=============
+ALTERING 
+=============
+
+alter PROC usp_ParticularPlayer 
+@Id int = 1
+as 
+BEGIN
+select *from Player where PId = @Id
+end;
+=======================
+built-in Procedures
+=======================
+@@RowCount
+
+exec sp_tables;  //shows all tables
+ 
+exec sp_helptext usp_AllPlayers; // shows the stored procedure statements
+
+===========================
+encrypting stored procedure                     
+===========================
+ALTER PROC usp_dPlayer
+@Id int
+WITH ENCRYPTION            ***************
+as
+begin
+	delete from Player where PId = @Id
+	if(@@ROWCOUNT <> 0)
+		begin
+	print 'recorded deleted!!'
+		end
+end	
+
+EXEC sp_helptext usp_dPlayer;	
+
+====================================
+
+================
+output parameters
+==================
+
+CREATE PROC usp_salaryByDept
+@did int,
+@total float output
+as
+begin
+select @total = sum(Salary) from Emps group by Department having Department=@did
+end
+
+==============
+using print
+==============
+declare @SumSalary float
+execute usp_salaryByDept 2 , @SumSalary output
+print 'Sum of salaries: '+convert(nvarchar(30),@SumSalary)
+===========================
+===========================
+
+==============
+nested proc
+==============
+ALTER PROC usp_nestPro
+@did int
+as
+begin
+declare @sum float
+execute usp_salaryByDept @did,@sum out
+if(@sum <>0)
+begin
+print 'Sum of salaries of department: '+convert(nvarchar(50),@did)+'is =' +convert(nvarchar(50),@sum)
+end
+else
+begin
+print 'No data available'
+end
+end
+
+=======================
+USER DEFINED FUNCTIONS
+=======================
+-------------------
+1)CREATE FUNCTION
+-------------------
+CREATE FUNCTION fnFullName(@fn nvarchar(50), @ln nvarchar(50))
+returns nvarchar(101)
+begin
+return @fn+''+@ln
+end
+-------------------
+2)EXECUTE FUNCTION
+-------------------
+select dbo.fnFullName('Ravi','kumar') 'FULL NAME';
+
+
+3)
+
+create function lg.fnTax
+(@price float)
+returns float 
+as 
+begin
+declare @tax float;
+if(@price >= 25000)
+begin
+select @tax = @price*0.18
+end
+else
+begin
+select @tax=@price*0.10
+end
+return @tax;
+end
+
+select PPPrice,lg.fnTax(PPrice) from lg.products;
+
+=========================
+SYSTEM STORED PROCEDURES
+=========================
+EXEC sp_pkeys 'Emps';
+
+https://learn.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/system-stored-procedures-transact-sql?view=sql-server-ver16
+
+
+=============================
+
+
+
+===========
+TRIGGERS
+===========
+
+--TRIGGERS
+
+--1)DML
+--A:after or For:after insert , after update, after delete
+--b:instead of insert , instead of delete ,instead of update
+--I) inserted:insert,update
+--II)deleted:delete
+
+------------------------------------
+
+--syntax
+--CREATE TRIGGER [SCHEMANAME.] trigger_name
+--ON [schemaname.] table_name
+--[WITH ENCRYPTION]
+--{fOR|after|instead of action(eg.Insert,update,delete)}
+--AS
+--[IF UPDATE (col name...)]
+--as
+--<sql statements>
+
+=====================================
+ex
+=====================================
+CREATE TABLE Customer2
+(
+Id int primary key,
+Fname nvarchar(50) not null,
+Lname nvarchar(50) not null,
+SPLan float not null,
+SDate date not null,
+SEDate date not null
+);
+
+insert into Customer2(Id,Fname,Lname,SPlan,SDate,SEDate) VALUES (1,'jayanth','yadavalli',20000,'08/04/2001','02/12/2025');
+
+CREATE TABLE Customer2_Log
+(
+LogId int primary key identity,
+Id int,
+Fname nvarchar(50),
+Lname nvarchar(50),
+SPlan float,
+SDate date,
+SEDate date,
+ActionTaken nvarchar(100),
+ActionTime datetime default getdate()
+);
+
+select *from customer2;
+
+select *from Customer2_Log;
+
+CREATE TRIGGER trgAfterCustInsert
+on
+Customer2
+after insert
+as
+declare @id int
+declare @fn nvarchar(50)
+declare @ln nvarchar(50)
+declare @plan float
+declare @sdate date
+declare @edate date
+select @id=Id,@fn=Fname,@ln=Lname,@plan=SPlan,@sdate=SDATE,@edate=SEDate from inserted
+insert into Customer2_Log(Id,Fname,Lname,SPlan,SDate,SEDate,ActionTaken)
+VALUES(@id,@fn,@ln,@plan,@sdate,@edate,'RECORD INSERTED')
+PRINT 'RECORD INSERTED AND ACTION CAPTURED IN CUSTOMER-LOG'
+
+
+
+
+
+
+
+
+
+
