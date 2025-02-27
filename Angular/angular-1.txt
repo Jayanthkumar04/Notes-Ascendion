@@ -15,6 +15,56 @@ download angular bootsrap and include it in the app.css
 while including ngbcollape make it true and include ngbcollapse
 
 
+====================
+bindings
+====================
+<h2>Class Binding</h2>
+
+<button [class.myClass]="isEnabled">Class Binding Example</button>
+
+
+
+<h2 [style.background-color]="myColor">Welcome</h2>
+
+<h2 [style.background-color]="myColor">i am jayanth</h2>
+
+
+<!-- Two way Databinding -->
+
+<h2>Two way databinding</h2>
+<h2>Welcome:{{userName}}</h2>
+
+<input type="text" [(ngModel)]="userName" >
+
+
+<!-- EVENT BINDING -->
+
+<h2>Event Binding</h2>
+
+<button (click)="welcome()">Welcome button</button>
+
+
+<!-- PROPERTY BINDING -->
+
+<img [src]="img">
+
+<br>
+
+<input type="text" [value]="userName">
+
+<h2>String Interpolation</h2>
+
+<hr>
+
+<h2>User name :{{userName}}</h2>
+
+<h2>Number:{{Number}}</h2>
+
+<h2>Calculation:{{Number}}*1={{Number*2}}</h2>
+<img src="{{img}}" alt="">
+
+
+
 ==============
 
 ROUTING
