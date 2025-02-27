@@ -1,3 +1,4 @@
+ng new project_name ==>to create new project
 download angular bootsrap and include it in the app.css
 
 while including ngbcollape make it true and include ngbcollapse
