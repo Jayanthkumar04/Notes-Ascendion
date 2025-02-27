@@ -1,6 +1,15 @@
 ng new project_name ==>to create new project
 ng build
 ng serve
+
+assets folder=>here we can include images,media files
+================================================
+without using template url and style url
+================================================
+
+  template:`<h1> hii i am from template</h1> 
+            <h2>i am jay</h2>`,
+  styles:[`h1{background-color:red;} h2{color:green}`]
 download angular bootsrap and include it in the app.css
 
 while including ngbcollape make it true and include ngbcollapse
