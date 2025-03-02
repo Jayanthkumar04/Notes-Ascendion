@@ -79,8 +79,8 @@ insert into Customer2(Id,Fname,Lname,SPlan,SDate,SEDate) VALUES (1,'jayanth','ya
 UPDATE
 ===========
 CREATE TRIGGER trgAfterCustUpdate 
-ON Customer2
-AFTER UPDATE
+ON Customer2 
+AFTER UPDATE 
 AS
 DECLARE 
     @id INT, 
@@ -191,6 +191,7 @@ SFee int,
 PaidOnDate date
 );
 
+
 ALTER TRIGGER trgFeePayConfirmation
 ON Fee
 AFTER INSERT
@@ -238,10 +239,9 @@ AFTER Drop_Table,Create_Table,Alter_Table
 AS
 PRINT 'you can not drop the table'
 PRINT 'To drop delete or disable trgstopdrop'
-rollback;
+rollback; 
 
 drop table Emps;
-
 
 ====================
 VIEWS
@@ -260,12 +260,128 @@ now if in view the record deleted then it will be deleted in real table also
 
 ------------------------------------
 
+use DAY3DB;
+
+CREATE TABLE Student
+(
+id int primary key,
+Fname nvarchar(20),
+Lname nvarchar(20),
+);
+
+insert into Student values(1,'sam','dicosta');
+insert into student values(2,'ram','docota');
+insert into student values(3,'ganesh','kumar');
+create view stu_view 
+as
+select *from student;
+
+
+select *From stu_view;
+select *from student;
+
+delete from stu_view where id=2;
 
 alter table student drop column Lname;
 
-after dropping if you want to see view it gives error
+
+USE DAY2DB;
+
+create view view_EmpDepts 
+AS
+select e.Id 'Employee Id',e.Fname+''+e.Lname 'Employee Name',e.Designation 'Employee Designation',d.DId 'Dept Id',
+d.DName 'Dept Name'
+from Emps e inner join Dept d on e.Department=d.DId;
+
+---------------------------------------------
+select *from view_EmpDepts;
+select *from emps;
+------------------------------------------------
+SELECT *FROM view_EmpDepts where [Dept Id] = 2;
+
+------------------------------------------------------
+SELECT *FROM view_EmpDepts WHERE [Dept Name] = 'it';
+
+---------------------------------------------------------------
+insert into Emps values (19,'kashif','farhan',75000,'admin',4);
+
+----------------------------------------------------------------
+-----------------------------------------------------------------
+
+
+alter table student drop column Lname;
+
+after dropping if you want to see view it gives error SO WE DO SCEMA BINDING THE ROWS IN VIEWS WONT BE DELETED
 ---------------------------------------
 
-===============
-SCHEMA BINDING
-===============
+SELECT TOP (1000) [Id]
+      ,[Fname]
+      ,[Lname]
+      ,[ODLimit]
+  FROM [DAY2DB].[dbo].[Customer]
+
+CREATE TABLE Customer3
+(
+CId nvarchar(5) primary key,
+Cname nvarchar(50) not null,
+Email nvarchar(50) not null unique,
+Contact nvarchar(50) not null unique check (Contact like'[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
+);
+
+insert into Customer3 values ('c1','rohith','rohit598@gmail.com','434324444');
+
+select *from Customer3;
+
+create view cust_view
+as
+select cid 'custId',cname 'custName',email 'custEmail' 
+from Customer3;
+
+select *from Customer3;
+
+alter table Customer3 drop column Email;
+
+alter table Customer3 drop constraint UQ__Customer__A9D1053429AB8719;
+
+alter table Customer3 drop column Email;
+
+select *from Customer3;
+
+select *from cust_view;
+
+--------------------------------------
+---------------------------------------
+--schema binding
+
+CREATE SCHEMA bank2;
+
+
+CREATE TABLE bank2.Customer3
+(
+CId nvarchar(5) primary key,
+Cname nvarchar(50) not null,
+Email nvarchar(50) not null unique,
+Contact nvarchar(50) not null unique check (Contact like'[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
+);
+
+insert into bank2.Customer3 values ('c1','rohith','rohit598@gmail.com','434324444');
+
+select *from bank2.Customer3;
+
+create view bank2.cust_view
+as
+select cid 'custId',cname 'custName',email 'custEmail' 
+from bank2.Customer3;
+
+select *from bank2.Customer3;
+
+alter table bank2.Customer3 drop column Email;
+
+alter table Customer3 drop constraint UQ__Customer__A9D1053429AB8719;
+
+alter table Customer3 drop column Email;
+
+select *from Customer3;
+
+select *from bank2.cust_view;
+

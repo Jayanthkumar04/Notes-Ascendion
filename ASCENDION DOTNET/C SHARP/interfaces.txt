@@ -1,0 +1,31 @@
+1)   
+ public interface IOne
+    {
+        //all methods in an interface are implicitly public and abstract by default.
+         void Display();
+    }
+
+ public interface ITwo
+ {
+     //void Welcome(string name);
+
+     void Display();
+ }
+
+public class OurClass : IOne, ITwo
+{
+        void IOne.Display()
+    {
+        Console.WriteLine("im coming fro minterface one");
+    }
+
+    void ITwo.Display()
+    {
+        Console.WriteLine("display of interface two");
+    }
+
+}
+
+============================================
+============================================
+2)	

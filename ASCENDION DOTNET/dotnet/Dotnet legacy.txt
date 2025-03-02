@@ -1,0 +1,41 @@
+============================================
+dotnet ef dbContext "server=ASCINLAP61606\SQLEXPRESS ;database=CustomerDb;trusted_connection=true;" Microsoft.EntityFrameworkCore.SqlServer -o Models
+================================================
+
+
+scaffold-dbContext "server=ASCINLAP61606\SQLEXPRESS ;database=CustomerDb;trusted_connection=true;TrustServerCertificate=true" Microsoft.EntityFrameworkCore.SqlServer -o Models
+
+=======================================================
+
+
+builder.Services.AddDbContext<StudentFeeDbContext>(
+
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("stuconn")));
+
+
+200, 204
+301, 308
+
+400, 401 , 402 , 403, 404, 
+
+500, 501, 503
+=======================
+imp lines of code
+=======================
+
+        [Key][Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
+
+===========================
+JWT
+===========================
+1)Create controller "UserAuthController"
+
+2)Add following dependencies
+  i)microsoft.authentication.jwtBearer
+
+
+**)ADD [Authorize] attribute
+
+

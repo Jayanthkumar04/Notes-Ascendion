@@ -1,0 +1,33 @@
+ static void Main(string[] args)
+ {
+     //CLASS MUST BE REFERENCE TYPE
+     //STRUCTURE MUST BE VALUE TYPE
+
+     OurGen<string, int> ourGen1 = new OurGen<string, int>("DLSJFAS", 11);
+
+     OurGen<object, float> ourGen2 = new OurGen<object, float>("ljdsfl", 13.4f);
+
+       
+}
+
+public class OurGen<T,U> where T:class where U:struct
+{
+    T ourField1;
+    U ourField2;
+
+    public OurGen(T ourField1,U ourField2)
+    {
+        this.ourField1 = ourField1;
+        this.ourField2 = ourField2;
+        
+    }
+
+    public void Display()
+    {
+        Console.WriteLine("stored value in :Field one\t "+ourField1+"\t Datatype:\t"+ourField1.GetType());
+
+        Console.WriteLine("stored value in :Field Two\t " + ourField2 + "\t Datatype:\t" + ourField2.GetType());
+    }
+
+
+}

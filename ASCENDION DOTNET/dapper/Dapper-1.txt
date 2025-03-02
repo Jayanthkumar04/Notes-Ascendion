@@ -1,0 +1,26 @@
+1)it is orm tool
+
+2)add "dapper" and "Microsoft.data.sqlclient" dependencies
+
+3) public class DapperContext
+ {
+     private IConfiguration _configuration;
+     private readonly string? _connectionString;
+     public DapperContext(IConfiguration configuration)
+     {
+         _configuration = configuration;
+         _connectionString = _configuration.GetConnectionString("IPLConStr");
+     }
+
+     public IDbConnection CreateConnection() => new SqlConnection(_connectionString);
+
+
+
+ }
+
+4)The class names and models must same as in the database
+
+5)
+
+
+

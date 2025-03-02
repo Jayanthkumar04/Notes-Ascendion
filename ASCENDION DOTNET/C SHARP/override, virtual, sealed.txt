@@ -1,0 +1,36 @@
+1)virtual==> if parent class methods are being used in subclass then then method in parent class has to be declared as virtual
+
+class Parent{
+        public virtual void Register()
+        {
+            Console.WriteLine("enter Id");
+            id=int.Parse(Console.ReadLine());
+            Console.WriteLine("enter name");
+            name = Console.ReadLine();
+            Console.WriteLine("enter qualification");
+            qual= Console.ReadLine();   
+
+        }
+
+        public virtual void Display()
+        {
+            Console.WriteLine("Id: "+id);
+            Console.WriteLine("Name: "+name);
+            Console.WriteLine("qualification: "+qual);
+        }
+}
+
+====================
+====================
+2)override==> overriding parent method in sub class
+
+========================
+=========================
+3)sealed class => if u want to stop further inheritance then the class must be declared as sealed
+
+sealed class  AppDev: Parent
+{
+
+
+}
+//no further inheritence

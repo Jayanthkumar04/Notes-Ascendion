@@ -1,0 +1,105 @@
+            var myVar2 = "jayanth";
+            Console.WriteLine("myVar dataype is "+myVar.GetType());
+
+ ArrayList al = new ArrayList()
+ {
+     "Sam",
+     'A',
+     DateTime.Now,
+     12.45
+ };
+
+1) al.add()  2)al.count 3)al.Capacity 4)al.Sort() 5)al.Reverse()
+
+5)al.Remove("ss") 6)al.RemoveAt(1); 7)al.
+
+
+===================
+====================
+HASHTABLE
+
+Hashtable ht = new Hashtable()
+{
+    { "hdd","harddisk" },
+    {"ram","random access memory" },
+    {"cd","compact disk" },
+    {"kb","kilo byte" }
+
+};
+
+ht.Keys   ht.Count ht.Values  
+
+=================
+=================
+STACK
+
+Stack stack = new Stack();
+            stack.Push("jayanht"); st.Pop()  st.Peek()   st.Count 
+
+=============
+=============
+QUEUE
+
+ Queue queue = new Queue();
+
+ q.Enqueue(10) //add  
+ q.Dequeue() // popping
+ q.peek();
+
+==============
+=============
+SortdList
+ Console.WriteLine("*************SORTED LIST******************************");
+
+ SortedList<int, string> productList = new SortedList<int, string>()
+ {
+     {1,"digital camera" },
+     {2,"ear phones" },
+     {3,"IPhone" },
+     {4,"Washing machine" }
+ };
+
+===========
+============
+//DICTONARY
+
+//DICTONARY IS SIMILAR TO HASHTABLE WITHOUT GENERICS
+Console.WriteLine("******************   DICTONARY     *************************");
+Dictionary<int, string> productList = new Dictionary<int, string>()
+{
+    {1,"digital camera" },
+    {11,"ear phones" },
+    {9,"IPhone" },
+    {3,"Washing machine" }
+};
+
+==============
+==============
+HASHSET
+ Console.WriteLine("****************HASHSET*******************");
+
+ HashSet<string> set = new HashSet<string>()
+ {
+     "amit",
+     "vijay",
+     "nithin",
+     "amit",
+     "gauri"
+ };
+Console.WriteLine("******* hashset methods ***************");
+
+HashSet<int> set1 = new HashSet<int> { 1, 2, 3, 5 };
+
+HashSet<int> set2 = new HashSet<int> { 3, 4, 5 };
+
+//UNION OF TWO SETS
+HashSet<int> set3 = new HashSet<int>( set1.Union(set2));
+
+Console.WriteLine("after union: "+string.Join(", ",set3));
+
+
+//diff of sets
+set1.ExceptWith(new HashSet<int> { 5 });
+
+
+

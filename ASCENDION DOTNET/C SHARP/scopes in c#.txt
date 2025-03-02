@@ -1,0 +1,14 @@
+1)public=> Accessible from anywhere
+
+2)protected => Accessible within the same class and derived classes
+
+3)private => Accessible only within the same class
+
+4)internal => Accessible within the same assembly (project)
+
+5)protected internal => Combination of protected and internal	
+
+6)private protected => Accessible within the same class and its derived classes (only in the same assembly)
+=============================
+=============================
+

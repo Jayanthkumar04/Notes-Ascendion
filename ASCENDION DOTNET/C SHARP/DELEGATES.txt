@@ -1,0 +1,8 @@
+it is a type safe function pointer
+
+A delegate holds the reference of a method and then calls the method for execution
+
+
+// event delegate_name Event_name;    
+
+
